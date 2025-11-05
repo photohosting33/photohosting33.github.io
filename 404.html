@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; }
+
+    :root {
+      --bg: #fff;
+      --text: #000;
+      --maxw: 900px;
+      --gap: 20px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      line-height: 1.4;
+    }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 40px 24px 48px;
+      min-height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: var(--gap);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    .sub {
+      font-size: 12px;
+      opacity: 0.8;
+      white-space: nowrap;
+    }
+
+    main {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding-block: 20px;
+    }
+
+    .code {
+      font-size: clamp(56px, 9vw, 132px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 10px 0;
+      line-height: 0.9;
+    }
+
+    .msg {
+      font-size: 14px;
+      max-width: 60ch;
+      margin: 0 auto 22px;
+      opacity: 0.9;
+    }
+
+    .actions {
+      display: inline-flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .link {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      color: inherit;
+      font-size: 14px;
+    }
+
+    footer {
+      font-size: 11px;
+      opacity: 0.75;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a href="/" aria-label="Go to homepage">
+        <img src="https://files.catbox.moe/jynr91.png" alt="Flatt Photography Logo" class="logo">
+      </a>
+      <div class="sub">flatt photography</div>
+    </header>
+
+    <main>
+      <div>
+        <h1 class="code">404</h1>
+        <p class="msg">The page you’re looking for doesn’t exist or has moved.</p>
+        <div class="actions" role="navigation" aria-label="404 actions">
+          <a class="link" href="/">← Back to home</a>
+          <a class="link" href="mailto:flattphotography@gmail.com">Contact</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div>© <span id="year"></span> Flatt Photography. All rights reserved.</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
