@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flatt Photography</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      background: #fff;
+      color: #000;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      line-height: 1.4;
+    }
+
+    .wrap {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 60px 30px 80px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 50px;
+    }
+
+    .logo {
+      height: 64px;
+      width: auto;
+      display: block;
+    }
+
+    .sub {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    /* --- GRID --- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+    }
+
+    figure {
+      position: relative;
+      background: #f4f4f4;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Controlled variation */
+    .cell { aspect-ratio: 4 / 3; grid-column: span 4; }
+    .wide { aspect-ratio: 16 / 9; grid-column: span 8; }
+    .tall { aspect-ratio: 3 / 4; grid-column: span 3; }
+    .full { aspect-ratio: 21 / 9; grid-column: span 12; }
+
+    @media (max-width: 900px) {
+      .cell, .wide, .tall, .full { grid-column: span 6; aspect-ratio: 4 / 3; }
+    }
+
+    @media (max-width: 600px) {
+      .cell, .wide, .tall, .full { grid-column: span 12; aspect-ratio: 4 / 3; }
+    }
+
+    figcaption {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2px 6px;
+    }
+
+    .about {
+      margin-top: 60px;
+      font-size: 14px;
+      max-width: 700px;
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 11px;
+      opacity: 0.75;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <!-- Replace with your logo -->
+      <img src="https://files.catbox.moe/jynr91.png" alt="Flatt Logo" class="logo">
+      <div class="sub">automotive photography</div>
+    </header>
+
+    <main class="grid">
+      <figure class="wide">
+        <img src="https://files.catbox.moe/di0y0y.jpeg" alt="801 Grand" />
+        <figcaption>801 Grand, 2025</figcaption>
+      </figure>
+
+      <figure class="cell">
+        <img src="https://files.catbox.moe/lhuyep.jpeg" alt="Truck" />
+        <figcaption>Chevy, 2025</figcaption>
+      </figure>
+
+      <figure class="tall">
+        <img src="https://files.catbox.moe/b39ydc.jpeg" alt="Meet" />
+        <figcaption>Paws and Pistons, 2025</figcaption>
+      </figure>
+
+      <figure class="cell">
+        <img src="https://files.catbox.moe/9qdy2f.jpeg" alt="Porsche" />
+        <figcaption>Porsche 911 GT3RS, 2025</figcaption>
+      </figure>
+
+      <figure class="wide">
+        <img src="https://files.catbox.moe/6m03uk.jpeg" alt="Badge" />
+        <figcaption>Badge, 2025</figcaption>
+      </figure>
+
+      <figure class="tall">
+        <img src="https://files.catbox.moe/l92t20.jpeg" alt="Celebration" />
+        <figcaption>Celebration, 2025</figcaption>
+      </figure>
+
+      <figure class="full">
+        <img src="https://files.catbox.moe/v0ut87.jpeg" alt="Black" />
+        <figcaption>Black Edition</figcaption>
+      </figure>
+    </main>
+
+    <section class="about">
+      <p>
+        I'm an amateur photographer specializing in automotive photography, with the ability to shoot anything I am tasked with.
+      </p>
+      <p>
+        Bookings &amp; quotes: <a href="mailto:flattphotography@gmail.com">flattphotography@gmail.com</a> · IG: <a href="https://instagram.com/flattphotography">@flattphotography</a>
+      </p>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Flatt Photography. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
