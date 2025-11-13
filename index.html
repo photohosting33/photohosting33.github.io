@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Flatt Photography</title>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -39,7 +40,7 @@
       opacity: 0.8;
     }
 
-    /* --- GRID --- */
+    /* --- UNIFORM GRID --- */
     .grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
@@ -48,9 +49,9 @@
 
     figure {
       position: relative;
+      margin: 0;
       background: #f4f4f4;
       overflow: hidden;
-      margin: 0;
     }
 
     img {
@@ -60,18 +61,27 @@
       display: block;
     }
 
-    /* Controlled variation */
-    .cell { aspect-ratio: 4 / 3; grid-column: span 4; }
-    .wide { aspect-ratio: 16 / 9; grid-column: span 8; }
-    .tall { aspect-ratio: 3 / 4; grid-column: span 3; }
-    .full { aspect-ratio: 21 / 9; grid-column: span 12; }
+    /* Uniform cell size */
+    .cell {
+      grid-column: span 4;
+      aspect-ratio: 4 / 3;
+    }
+
+    /* Empty cells */
+    .empty {
+      background: #eee;
+    }
 
     @media (max-width: 900px) {
-      .cell, .wide, .tall, .full { grid-column: span 6; aspect-ratio: 4 / 3; }
+      .cell {
+        grid-column: span 6;
+      }
     }
 
     @media (max-width: 600px) {
-      .cell, .wide, .tall, .full { grid-column: span 12; aspect-ratio: 4 / 3; }
+      .cell {
+        grid-column: span 12;
+      }
     }
 
     figcaption {
@@ -102,54 +112,67 @@
     }
   </style>
 </head>
+
 <body>
   <div class="wrap">
+
     <header>
-      <!-- Replace with your logo -->
-      <img src="https://files.catbox.moe/jynr91.png" alt="Flatt Logo" class="logo">
+      <img src="https://i.postimg.cc/2ysQtcSQ/jynr91.png" alt="Flatt Logo" class="logo">
       <div class="sub">automotive photography</div>
     </header>
 
     <main class="grid">
-      <figure class="wide">
-        <img src="https://files.catbox.moe/di0y0y.jpeg" alt="801 Grand" />
+
+      <figure class="cell">
+        <img src="https://i.postimg.cc/hvkLYyt1/di0y0y.jpg" alt="801 Grand" />
         <figcaption>801 Grand, 2025</figcaption>
       </figure>
 
       <figure class="cell">
-        <img src="https://files.catbox.moe/lhuyep.jpeg" alt="Truck" />
+        <img src="https://i.postimg.cc/KcRCd18H/lhuyep.jpg" alt="Truck" />
         <figcaption>Chevy, 2025</figcaption>
       </figure>
 
-      <figure class="tall">
-        <img src="https://files.catbox.moe/b39ydc.jpeg" alt="Meet" />
+      <figure class="cell">
+        <img src="https://i.postimg.cc/wMCXrfj2/b39ydc.jpg" alt="Meet" />
         <figcaption>Paws and Pistons, 2025</figcaption>
       </figure>
 
       <figure class="cell">
-        <img src="https://files.catbox.moe/9qdy2f.jpeg" alt="Porsche" />
+        <img src="https://i.postimg.cc/d3b2fHV4/9qdy2f.jpg" alt="Porsche" />
         <figcaption>Porsche 911 GT3RS, 2025</figcaption>
       </figure>
 
-      <figure class="wide">
-        <img src="https://files.catbox.moe/6m03uk.jpeg" alt="Badge" />
+      <figure class="cell">
+        <img src="https://i.postimg.cc/jqLBGDjr/6m03uk.jpg" alt="Badge" />
         <figcaption>Badge, 2025</figcaption>
       </figure>
 
-      <figure class="tall">
-        <img src="https://files.catbox.moe/l92t20.jpeg" alt="Celebration" />
+      <figure class="cell">
+        <img src="https://i.postimg.cc/596DZXtV/l92t20.jpg" alt="Celebration" />
         <figcaption>Celebration, 2025</figcaption>
       </figure>
 
-      <figure class="full">
-        <img src="https://files.catbox.moe/v0ut87.jpeg" alt="Black" />
-        <figcaption>Black Edition</figcaption>
+      <figure class="cell">
+        <img src="https://i.postimg.cc/BnLWHtrG/DSC00533.jpg" alt="Black" />
+        <figcaption>Chevy, 2025</figcaption>
       </figure>
+
+     <figure class="cell">
+        <img src="https://i.postimg.cc/Fzs8RKyG/DSC-1733.jpg" alt="Black" />
+        <figcaption>Porsche 911 GT3, 2025</figcaption>
+      </figure>
+      
+     <figure class="cell">
+        <img src="https://i.postimg.cc/2jK2vTrV/DSC00390.jpg" alt="Black" />
+        <figcaption>Black Edition, 2025</figcaption>
+      </figure>
+
     </main>
 
     <section class="about">
       <p>
-        I'm an amateur photographer specializing in automotive photography, with the ability to shoot anything I am tasked with to the best of my ability.
+        I'm an amateur photographer specializing in automotive photography, specializing in detail shots to emphasize your car the best I can :)
       </p>
       <p>
         Bookings &amp; quotes: <a href="mailto:flattphotography@gmail.com">flattphotography@gmail.com</a> · IG: <a href="https://instagram.com/flattphotography">@flattphotography</a>
@@ -159,6 +182,7 @@
     <footer>
       © <span id="year"></span> Flatt Photography. All rights reserved.
     </footer>
+
   </div>
 
   <script>
