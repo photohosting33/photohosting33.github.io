@@ -1,192 +1,757 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Flatt Photography</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flatt Photography | Automotive Photography</title>
+    <link rel="icon" type="image/png" href="YOUR_FAVICON_URL.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; }
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Consolas', monospace;
+            transition: background 0.3s, color 0.3s;
+        }
 
-    body {
-      background: #fff;
-      color: #000;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      line-height: 1.4;
-    }
+        body.dark-mode {
+            background: #0a0a0a;
+            color: #e0e0e0;
+        }
 
-    .wrap {
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 60px 30px 80px;
-    }
+        body.light-mode {
+            background: #fafafa;
+            color: #1a1a1a;
+        }
 
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 50px;
-    }
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s, border-color 0.3s;
+        }
 
-    .logo {
-      height: 64px;
-      width: auto;
-      display: block;
-    }
+        .dark-mode header {
+            background: #0a0a0a;
+            border-bottom: 1px solid #333;
+        }
 
-    .sub {
-      font-size: 12px;
-      opacity: 0.8;
-    }
+        .light-mode header {
+            background: #fafafa;
+            border-bottom: 1px solid #ddd;
+        }
 
-    /* --- UNIFORM GRID --- */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 20px;
-    }
+        .logo {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
 
-    figure {
-      position: relative;
-      margin: 0;
-      background: #f4f4f4;
-      overflow: hidden;
-    }
+        .logo-image {
+            height: 40px;
+            width: auto;
+            transition: opacity 0.3s;
+        }
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+        nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
 
-    /* Uniform cell size */
-    .cell {
-      grid-column: span 4;
-      aspect-ratio: 4 / 3;
-    }
+        .theme-toggle {
+            padding: 10px 24px;
+            border: 1px solid;
+            font-size: 12px;
+            cursor: pointer;
+            background: transparent;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Consolas', monospace;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
 
-    /* Empty cells */
-    .empty {
-      background: #eee;
-    }
+        .dark-mode .theme-toggle {
+            border-color: #e0e0e0;
+            color: #e0e0e0;
+        }
 
-    @media (max-width: 900px) {
-      .cell {
-        grid-column: span 6;
-      }
-    }
+        .light-mode .theme-toggle {
+            border-color: #1a1a1a;
+            color: #1a1a1a;
+        }
 
-    @media (max-width: 600px) {
-      .cell {
-        grid-column: span 12;
-      }
-    }
+        .theme-toggle:hover {
+            opacity: 0.7;
+        }
 
-    figcaption {
-      position: absolute;
-      bottom: 8px;
-      left: 8px;
-      font-size: 11px;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 2px 6px;
-    }
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 60px 40px 40px;
+        }
 
-    .about {
-      margin-top: 60px;
-      font-size: 14px;
-      max-width: 700px;
-    }
+        h1 {
+            font-size: 72px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
 
-    footer {
-      margin-top: 60px;
-      font-size: 11px;
-      opacity: 0.75;
-    }
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
 
-    a {
-      color: inherit;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-  </style>
+        .subtitle {
+            font-size: 13px;
+            margin-bottom: 40px;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+            transition: color 0.3s;
+        }
+
+        .dark-mode .subtitle {
+            color: #888;
+        }
+
+        .light-mode .subtitle {
+            color: #666;
+        }
+
+        /* Gallery Section */
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .dark-mode .gallery-header {
+            border-bottom: 1px solid #333;
+        }
+
+        .light-mode .gallery-header {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .gallery-title {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .gallery-title sup {
+            font-size: 10px;
+            transition: color 0.3s;
+        }
+
+        .dark-mode .gallery-title sup {
+            color: #666;
+        }
+
+        .light-mode .gallery-title sup {
+            color: #999;
+        }
+
+        /* Grid Gallery - NO theme changes applied to images */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            margin-bottom: 80px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            position: relative;
+            background: #1a1a1a;
+        }
+
+        .gallery-item:hover {
+            opacity: 0.8;
+        }
+
+        .gallery-item::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 10px;
+            padding: 5px 10px;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            color: #e0e0e0;
+            background: rgba(0,0,0,0.7);
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Expertise Section */
+        .expertise {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            margin-bottom: 80px;
+            padding: 40px 0;
+            transition: border-color 0.3s;
+        }
+
+        .dark-mode .expertise {
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+
+        .light-mode .expertise {
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .expertise h2 {
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 1.5;
+            letter-spacing: 0.5px;
+        }
+
+        .expertise-content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .expertise-category {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 30px;
+        }
+
+        .category-number {
+            font-size: 48px;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+
+        .dark-mode .category-number {
+            color: #333;
+        }
+
+        .light-mode .category-number {
+            color: #ddd;
+        }
+
+        .category-details h3 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .category-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        .dark-mode .category-list {
+            color: #888;
+        }
+
+        .light-mode .category-list {
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 40px;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .dark-mode footer {
+            background: #0a0a0a;
+            border-top: 1px solid #333;
+        }
+
+        .light-mode footer {
+            background: #fafafa;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1400px;
+        }
+
+        .footer-section h3 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            font-size: 12px;
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: opacity 0.3s;
+        }
+
+        .dark-mode .footer-section p,
+        .dark-mode .footer-section a {
+            color: #888;
+        }
+
+        .light-mode .footer-section p,
+        .light-mode .footer-section a {
+            color: #666;
+        }
+
+        .footer-section a:hover {
+            opacity: 0.6;
+        }
+
+        .footer-bottom {
+            margin-top: 60px;
+            padding-top: 30px;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .dark-mode .footer-bottom {
+            border-top: 1px solid #333;
+            color: #666;
+        }
+
+        .light-mode .footer-bottom {
+            border-top: 1px solid #ddd;
+            color: #999;
+        }
+
+        /* Modal/Lightbox */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            backdrop-filter: grayscale(100%);
+            -webkit-backdrop-filter: grayscale(100%);
+        }
+
+        .dark-mode .modal {
+            background: rgba(10, 10, 10, 0.85);
+        }
+
+        .light-mode .modal {
+            background: rgba(250, 250, 250, 0.85);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 1400px;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            position: relative;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            font-size: 40px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 10px;
+            line-height: 1;
+            transition: opacity 0.3s;
+            z-index: 2001;
+        }
+
+        .dark-mode .modal-close {
+            color: #e0e0e0;
+        }
+
+        .light-mode .modal-close {
+            color: #1a1a1a;
+        }
+
+        .modal-close:hover {
+            opacity: 0.6;
+        }
+
+        .modal-info {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            padding: 15px 20px;
+            z-index: 2001;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .dark-mode .modal-info {
+            color: #e0e0e0;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .light-mode .modal-info {
+            color: #1a1a1a;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .expertise {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 48px;
+            }
+
+            header {
+                padding: 15px 20px;
+            }
+
+            main {
+                padding: 40px 20px;
+            }
+
+            nav {
+                gap: 20px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
 </head>
-
-<body>
-  <div class="wrap">
-
+<body class="dark-mode">
     <header>
-      <img src="https://i.postimg.cc/2ysQtcSQ/jynr91.png" alt="Flatt Logo" class="logo">
-      <div class="sub">automotive photography</div>
+        <div class="logo">
+            <img class="logo-image" id="headerLogo" src="" alt="Flatt Photography">
+        </div>
+        <nav>
+            <button class="theme-toggle" id="themeToggle">LIGHT MODE</button>
+        </nav>
     </header>
 
-    <main class="grid">
+    <main>
+        <h1 class="hero-title">FLATT PHOTOGRAPHY</h1>
+        <p class="subtitle">AUTOMOTIVE PHOTOGRAPHY STUDIO SPECIALIZING IN VISUAL STORYTELLING,<br>DYNAMIC COMPOSITION AND AUTHENTIC AUTOMOTIVE EXPERIENCES.<br>WHERE MECHANICAL PRECISION MEETS CREATIVE VISION.</p>
 
-      <figure class="cell">
-        <img src="https://i.postimg.cc/hvkLYyt1/di0y0y.jpg" alt="801 Grand" />
-        <figcaption>801 Grand, 2025</figcaption>
-      </figure>
+        <section class="gallery-section">
+            <div class="gallery-header">
+                <h2 class="gallery-title">SELECTED WORKS<sup>(12)</sup></h2>
+            </div>
 
-      <figure class="cell">
-        <img src="https://i.postimg.cc/KcRCd18H/lhuyep.jpg" alt="Truck" />
-        <figcaption>Chevy, 2025</figcaption>
-      </figure>
+            <div class="gallery-grid" id="gallery"></div>
+        </section>
 
-      <figure class="cell">
-        <img src="https://i.postimg.cc/wMCXrfj2/b39ydc.jpg" alt="Meet" />
-        <figcaption>Paws and Pistons, 2025</figcaption>
-      </figure>
+        <section class="expertise">
+            <h2>WE BELIEVE AUTOMOTIVE PHOTOGRAPHY SHOULD GO BEYOND DOCUMENTATION AND CREATE COMPELLING NARRATIVES. THAT'S WHY OUR PROCESS COMBINES TECHNICAL MASTERY WITH ARTISTIC VISION.</h2>
+            <div class="expertise-content">
+                <div class="expertise-category">
+                    <div class="category-number">01</div>
+                    <div class="category-details">
+                        <h3>PHOTOGRAPHY • CORE</h3>
+                        <div class="category-list">
+                            <span>STUDIO PHOTOGRAPHY</span>
+                            <span>LOCATION SHOOTS</span>
+                            <span>DETAIL WORK</span>
+                            <span>LIFESTYLE IMAGERY</span>
+                        </div>
+                    </div>
+                </div>
 
-      <figure class="cell">
-        <img src="https://i.postimg.cc/d3b2fHV4/9qdy2f.jpg" alt="Porsche" />
-        <figcaption>Porsche 911 GT3RS, 2025</figcaption>
-      </figure>
+                <div class="expertise-category">
+                    <div class="category-number">02</div>
+                    <div class="category-details">
+                        <h3>POST-PRODUCTION</h3>
+                        <div class="category-list">
+                            <span>COLOR GRADING</span>
+                            <span>RETOUCHING</span>
+                        </div>
+                    </div>
+                </div>
 
-      <figure class="cell">
-        <img src="https://i.postimg.cc/jqLBGDjr/6m03uk.jpg" alt="Badge" />
-        <figcaption>Badge, 2025</figcaption>
-      </figure>
-
-      <figure class="cell">
-        <img src="https://i.postimg.cc/596DZXtV/l92t20.jpg" alt="Celebration" />
-        <figcaption>Celebration, 2025</figcaption>
-      </figure>
-
-      <figure class="cell">
-        <img src="https://i.postimg.cc/BnLWHtrG/DSC00533.jpg" alt="Black" />
-        <figcaption>Chevy, 2025</figcaption>
-      </figure>
-
-     <figure class="cell">
-        <img src="https://i.postimg.cc/Fzs8RKyG/DSC-1733.jpg" alt="Black" />
-        <figcaption>Porsche 911 GT3, 2025</figcaption>
-      </figure>
-      
-     <figure class="cell">
-        <img src="https://i.postimg.cc/2jK2vTrV/DSC00390.jpg" alt="Black" />
-        <figcaption>Black Edition, 2025</figcaption>
-      </figure>
-
+                <div class="expertise-category">
+                    <div class="category-number">03</div>
+                    <div class="category-details">
+                        <h3>CREATIVE DIRECTION</h3>
+                        <div class="category-list">
+                            <span>CAMPAIGN STRATEGY</span>
+                            <span>ART DIRECTION</span>
+                            <span>BRAND IDENTITY</span>
+                            <span>EDITORIAL DESIGN</span>
+                            <span>CONCEPT DEVELOPMENT</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <section class="about">
-      <p>
-        I'm an amateur photographer specializing in automotive photography, specializing in detail shots to emphasize your car the best I can :)
-      </p>
-      <p>
-        Bookings &amp; quotes: <a href="mailto:flattphotography@gmail.com">flattphotography@gmail.com</a> · IG: <a href="https://instagram.com/flattphotography">@flattphotography</a>
-      </p>
-    </section>
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CONTACT</h3>
+                <p>READY TO START YOUR PROJECT?</p>
+                <a href="mailto:flattphotography@gmail.com">FLATTPHOTOGRAPHY@GMAIL.COM</a>
+            </div>
 
-    <footer>
-      © <span id="year"></span> Flatt Photography. All rights reserved.
+            <div class="footer-section">
+                <h3>FOLLOW</h3>
+                <a href="https://instagram.com/flattphotography">INSTAGRAM</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 FLATT PHOTOGRAPHY. ALL RIGHTS RESERVED.
+        </div>
     </footer>
 
-  </div>
+    <!-- Modal for large image view -->
+    <div class="modal" id="imageModal">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="">
+            <div class="modal-info" id="modalInfo"></div>
+        </div>
+    </div>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    <script>
+        // ========================================
+        // LOGO & FAVICON CONFIGURATION
+        // ========================================
+        const DARK_LOGO = 'https://files.catbox.moe/hwvflh.png';
+        const LIGHT_LOGO = 'https://files.catbox.moe/jynr91.png';
+        const FAVICON = 'https://files.catbox.moe/hwvflh.png';
+
+        // ========================================
+        // GALLERY CONFIGURATION
+        // ========================================
+        const GALLERY_IMAGES = [
+            {
+                imageUrl: 'https://files.catbox.moe/k55q3j.jpg',
+                title: 'BLACK EDITION',
+                description: '2025'
+            },
+            {
+                imageUrl: 'https://files.catbox.moe/t1psvn.JPG',
+                title: '911',
+                description: 'HAWKEYE DOWNS SPEEDWAY'
+            },
+            {
+                imageUrl: 'https://files.catbox.moe/gj4wr1.JPG',
+                title: '765LT',
+                description: 'HAWKEYES DOWNS SPEEDWAY'
+            },
+            {
+                imageUrl: 'https://files.catbox.moe/2pckv5.JPG',
+                title: 'PORSCHE',
+                description: 'DES MOINES CONCOURS'
+            },
+            {
+                imageUrl: 'https://files.catbox.moe/8z0lq6.jpeg',
+                title: 'TRUCK',
+                description: 'RANDOM FIELD'
+            },
+            {
+                imageUrl: 'https://files.catbox.moe/dpss0i.JPG',
+                title: 'GT3 RS',
+                description: 'DES MOINES CONCOURS'
+            },
+            {
+                imageUrl: 'https://files.catbox.moe/rs7rhk.jpeg',
+                title: 'TRUCK, AGAIN',
+                description: 'RANDOM FIELD AGAIN'
+            },
+            {
+                imageUrl: 'https://files.catbox.moe/crxwle.JPG',
+                title: 'STANG',
+                description: 'RANDOM MEET'
+            },
+            {
+                imageUrl: 'https://files.catbox.moe/y76aqy.JPG',
+                title: 'BEAMER',
+                description: 'TARGET MEET'
+            },
+            {
+                imageUrl: 'https://files.catbox.moe/t3afdj.jpg',
+                title: 'M3',
+                description: 'TARGET MEET AGAIN'
+            },
+            {
+                imageUrl: 'https://files.catbox.moe/mitnay.JPG',
+                title: 'GT3 NO WING??',
+                description: 'PORSCHE DES MOINES'
+            },
+            {
+                imageUrl: 'https://files.catbox.moe/yqq6df.JPG',
+                title: 'C8',
+                description: 'RANDOM MEET'
+            }
+        ];
+
+        // ========================================
+        // APPLICATION CODE
+        // ========================================
+        
+        const body = document.body;
+        const headerLogo = document.getElementById('headerLogo');
+        const themeToggle = document.getElementById('themeToggle');
+        const gallery = document.getElementById('gallery');
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalInfo = document.getElementById('modalInfo');
+        const modalClose = document.getElementById('modalClose');
+
+        // Initialize logos and favicon
+        headerLogo.src = DARK_LOGO;
+        
+        // Set favicon dynamically
+        if (FAVICON) {
+            const link = document.querySelector("link[rel*='icon']");
+            if (link) {
+                link.href = FAVICON;
+            }
+        }
+
+        // Theme toggle - ONLY changes page colors and logos
+        themeToggle.addEventListener('click', () => {
+            const isDark = body.classList.contains('dark-mode');
+            
+            if (isDark) {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                themeToggle.textContent = 'DARK MODE';
+                headerLogo.src = LIGHT_LOGO;
+            } else {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                themeToggle.textContent = 'LIGHT MODE';
+                headerLogo.src = DARK_LOGO;
+            }
+        });
+
+        // Build gallery - images are NEVER changed after this
+        GALLERY_IMAGES.forEach((photo) => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.setAttribute('data-label', photo.description);
+            
+            const img = document.createElement('img');
+            img.src = photo.imageUrl;
+            img.alt = photo.title;
+            
+            item.appendChild(img);
+            
+            item.addEventListener('click', () => {
+                modalImage.src = photo.imageUrl;
+                modalInfo.textContent = `${photo.title} - ${photo.description}`;
+                modal.classList.add('active');
+                body.style.overflow = 'hidden';
+            });
+            
+            gallery.appendChild(item);
+        });
+
+        // Modal controls
+        modalClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            modal.classList.remove('active');
+            body.style.overflow = 'auto';
+        });
+
+        modal.addEventListener('click', () => {
+            modal.classList.remove('active');
+            body.style.overflow = 'auto';
+        });
+
+        document.querySelector('.modal-content').addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                body.style.overflow = 'auto';
+            }
+        });
+    </script>
 </body>
 </html>
